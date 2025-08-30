@@ -1,8 +1,8 @@
-public class DynamicArray {
+public class DynamicIntArray {
     private int[] baseArray;
     private int size;
 
-    public DynamicArray() { //Constructor creates an array with 2 items and size is default 0
+    public DynamicIntArray() { //Constructor creates an array with 2 items and size is default 0
         baseArray = new int[2];
         size = 0;
     }
