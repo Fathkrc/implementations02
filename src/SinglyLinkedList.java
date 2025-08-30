@@ -3,7 +3,6 @@ public class SinglyLinkedList<T> {
     private Node<T> head; // singly linked list no tail
     private int size;
 
-    //constructor null head size 0
     public SinglyLinkedList(){
         head = null;
         size = 0;
