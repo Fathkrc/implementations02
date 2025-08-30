@@ -20,7 +20,11 @@ public class Main {
         System.out.println("Dynamic Int array has " + test1.size() + " items");
         System.out.println("Capacity of Dynamic Int Array is " + test1.arrayCapacity());// 16
         System.out.println("Is Array Empty ? : " + test1.isEmpty());
-//        System.out.println("index out of bound ?  : "+ test1.get(test1.arrayCapacity()));
+        try {
+            System.out.println("index out of bound ?  : "+ test1.get(test1.arrayCapacity()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage()+ " *** Error Case ***");
+        }
 
         System.out.println("================================================");
 
@@ -33,7 +37,12 @@ public class Main {
         System.out.println(testList1.get(2));
         System.out.println(testList1.size());
         System.out.println("Is Linked List Empty? : " + testList1.isEmpty()); // false
-//        System.out.println("index out of bound ?  : " + testList1.get(testList1.size()));
+        try {
+            System.out.println("index out of bound ?  : " + testList1.get(testList1.size()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage()+" *** Error Case ***");
+        }
+
         System.out.println("================================================");
 
 //        SinglyLinkedList<int> testList2 = new SinglyLinkedList<>();
