@@ -64,6 +64,7 @@ public class DynamicIntArray implements Iterable<Integer> {
                 if (!hasNext()) throw new NoSuchElementException();
                 return baseArray[i++];
             }
+            // need to check documents
         };
     }
 
