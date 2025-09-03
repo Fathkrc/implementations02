@@ -1,9 +1,9 @@
-package main.java.com.Algorithms;
+package com.algorithms;
 
 
 public class Main {
     public static void main(String[] args) {
-        DynamicIntArray test1 = new DynamicIntArray();
+        com.algorithms.DynamicIntArray test1 = new com.algorithms.DynamicIntArray();
         test1.add(12);
         test1.add(25);
         test1.add(45);
@@ -29,7 +29,7 @@ public class Main {
 
         System.out.println("================================================");
 
-        SinglyLinkedList<String> testList1 = new SinglyLinkedList<>();
+        com.algorithms.SinglyLinkedList<String> testList1 = new com.algorithms.SinglyLinkedList<>();
         testList1.add("A");
         testList1.add("B");
         testList1.add("C");
@@ -48,7 +48,7 @@ public class Main {
 
 //        SinglyLinkedList<int> testList2 = new SinglyLinkedList<>();
 //        not working with primitive data types I have to use Wrapper class
-        SinglyLinkedList<Integer> testList2 = new SinglyLinkedList<>();
+        com.algorithms.SinglyLinkedList<Integer> testList2 = new com.algorithms.SinglyLinkedList<>();
         testList2.add(111);
         testList2.add(222);
         testList2.add(333);

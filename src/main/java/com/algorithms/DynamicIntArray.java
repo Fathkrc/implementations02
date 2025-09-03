@@ -1,4 +1,4 @@
-package main.java.com.Algorithms;
+package com.algorithms;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -41,7 +41,7 @@ public class DynamicIntArray implements Iterable<Integer> {
 
     public int get(int index) {
         if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException("Index Error");
+            throw new IndexOutOfBoundsException();
         return baseArray[index];
     }
 

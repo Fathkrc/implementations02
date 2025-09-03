@@ -1,0 +1,4 @@
+1 - At remove methods should I return the removed value like pop() or boolean  ?
+Which is cleaner ?
+
+2 -
