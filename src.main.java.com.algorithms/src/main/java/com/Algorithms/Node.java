@@ -1,4 +1,4 @@
-package src.main.java.com.Algorithms;
+package main.java.com.Algorithms;
 
 public class Node<T> {
 

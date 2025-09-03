@@ -1,4 +1,4 @@
-package src.main.java.com.Algorithms;
+package main.java.com.Algorithms;
 
 public class SinglyLinkedList<T> {
 
@@ -24,6 +24,10 @@ public class SinglyLinkedList<T> {
             //adding to end
         }
         size++;
+    }
+    public void add(int index, int value){
+
+
     }
     public T get(int index) {
         if (index < 0 || index >= size) {
