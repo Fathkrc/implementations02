@@ -21,7 +21,7 @@ public class Main {
 //        System.out.println("Dynamic Int array has " + test1.size() + " items");
 //        System.out.println("Capacity of Dynamic Int Array is " + test1.arrayCapacity());// 16
 //        System.out.println("Is Array Empty ? : " + test1.isEmpty());
-////        try {
+//        try {
 //            System.out.println("index out of bound ?  : "+ test1.get(test1.arrayCapacity()));
 //        } catch (Exception e) {
 //            System.out.println(e.getMessage()+ " *** Error Case ***");
