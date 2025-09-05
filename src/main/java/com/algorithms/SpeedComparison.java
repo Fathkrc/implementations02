@@ -11,8 +11,8 @@ public class SpeedComparison {
 
         System.out.println("\n===== GET (sequential) =====");
         compareGetItems(100000);
-//        DynamicIntArray add 100000 items: 1 ms
-//        SinglyLinkedList add 100000 items: 5481 ms
+//        DynamicIntArray get 100000 items: 1 ms
+//        SinglyLinkedList get 100000 items: 5481 ms
 
         System.out.println("\n===== REMOVE AT HEAD =====");
         compareRemoveAtHead(100000);
