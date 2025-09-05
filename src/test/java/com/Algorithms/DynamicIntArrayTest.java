@@ -4,6 +4,7 @@ import com.algorithms.DynamicIntArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -71,16 +72,34 @@ public class DynamicIntArrayTest {
         assertEquals(111, array.get(3)); // 222, 333, 444, 111
         assertEquals(4, array.size());// size must be decreased
     }
+    @Test
+    void removeAtRemovesAndReturnsCorrectValue() {
+        DynamicIntArray a = new DynamicIntArray();
+        a.add(111);
+        a.add(222);
+        a.add(333);   // [111,222,333]
 
+        assertEquals(222, a.removeAt(1));
+        assertEquals(2, a.size());
+        assertEquals(111, a.get(0));
+        assertEquals(333, a.get(1));
+    }
+    @Test
+    void removeAt_outOfBoundsThrows() {
+        DynamicIntArray a = new DynamicIntArray();
+        a.add(666);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> a.removeAt(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> a.removeAt(1));
+    }
     @Test
     void iterator_iteratesInOrder_andThrowsAfterEnd() {
         for (int i = 0; i < 5; i++) array.add(i);
 
-        var testIterator = array.iterator();
+        Iterator<Integer> testIterator = array.iterator();
         for (int i = 0; i < 5; i++) {
-            assertTrue(testIterator.hasNext());
-            assertEquals(i, array.get(i)); // not sure here
-            testIterator.next();
+
+            assertEquals(i, testIterator.next().intValue());
         }
         assertFalse(testIterator.hasNext());
         assertThrows(NoSuchElementException.class, testIterator::next);

@@ -34,6 +34,13 @@ public class DynamicIntArray implements Iterable<Integer> {
         size--;
         return true;
     }
+    public int removeAt(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
+        int removedValue = baseArray[index];
+        System.arraycopy(baseArray, index + 1, baseArray, index, size - index - 1);
+        size--;
+        return removedValue;
+    }
 
     public boolean isEmpty() {
         return size == 0;
