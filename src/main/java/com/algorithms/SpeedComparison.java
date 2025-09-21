@@ -25,7 +25,7 @@ public class SpeedComparison {
         // DYNAMIC ARRAY vs SINGLY LINKED APPEND
 
         // DYNAMIC ARRAY
-        DynamicArray array = new DynamicArray();
+        DynamicArray<Integer> array = new DynamicArray<>();
         long startTime = System.nanoTime();
         for (int i = 0; i < loopCount; i++) array.add(i);
         long endTime = System.nanoTime();
@@ -40,7 +40,7 @@ public class SpeedComparison {
     }
 
     public static void compareGetItems(int loopCount) {
-        DynamicArray array = new DynamicArray();
+        DynamicArray<Integer> array = new DynamicArray();
         for (int i = 0; i < loopCount; i++) array.add(i);
 
         SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
@@ -65,7 +65,7 @@ public class SpeedComparison {
     public static void compareRemoveAtHead(int loopCount) {
 
         // Dynamic array
-        DynamicArray array = new DynamicArray();
+        DynamicArray<Integer> array = new DynamicArray<>();
         for (int i = 0; i < loopCount; i++) array.add(i);
         long startTime = System.nanoTime();
         for (int i = 0; i < loopCount; i++) array.removeAt(0);
