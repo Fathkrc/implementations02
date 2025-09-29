@@ -97,16 +97,10 @@ public class SinglyLinkedListTest {
         SinglyLinkedList<String> test = new SinglyLinkedList<>();
         test.add(null);
         test.add("A"); // [null,"A"]
-
         assertNull(test.get(0));
-        assertFalse(test.remove(null));  //  with value we can not remove null
-        assertEquals(2, test.size());
-        assertNull(test.get(0));
-        assertEquals("A", test.get(1));
-        test.removeAt(0); // we can remove item with giving the index
-        assertEquals("A", test.get(0));
+        assertTrue(test.remove(null));  //  with value we can not remove null
         assertEquals(1, test.size());
-
+        assertEquals("A", test.get(0));
     }
 
     @Test

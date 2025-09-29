@@ -56,19 +56,21 @@ public class SinglyLinkedList<T> {
     }
 
     public boolean remove(T value) {  // remove with the value
-        if (head == null || value == null) return false;
-
-        if (value.equals(head.data)) {  //checking first
+        //  (null or non-null)
+        if ((value == null && head.data == null) ||
+                (value != null && value.equals(head.data))) {
             head = head.next;
             size--;
             return true;
         }
 
-        for (Node<T> prev = head, /* Node<T> */ cur = head.next;   // [data - prev] -> [data- current] -> ...
+        // Case 2: head goes to next element
+        for (Node<T> prev = head, cur = head.next;
              cur != null;
              prev = cur, cur = cur.next) {
 
-            if (cur.data.equals(value)) {
+            if ((value == null && cur.data == null) ||
+                    (value != null && value.equals(cur.data))) {
                 prev.next = cur.next;
                 size--;
                 return true;
