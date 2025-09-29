@@ -11,7 +11,7 @@ public class DynamicArray<T> implements Iterable<T> {
         baseArray =(T[])new  Object[2];
         size = 0;
     }
-
+// TODO: ADD ConcurrentModificationException with counter variable changes at all changes
     public void add(T value) {
         if (size == baseArray.length) doubleBaseArraySize();
         baseArray[size++] = value;
@@ -63,24 +63,24 @@ public class DynamicArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
-            int cursor = 0;
-            int last= -1;
+            int prev = 0;
+            int curr = -1;
             public boolean hasNext() {
-                return cursor < size;
+                return prev < size;
             }
             public T next() {
                 if (!hasNext()) throw new NoSuchElementException();
-                last = cursor;
-                return baseArray[cursor++];
+                curr = prev;
+                return baseArray[prev++];
             }
             @Override
             public void remove() {
-                if (last < 0) throw new IllegalStateException("next() not called or already removed");
+                if (curr < 0) throw new IllegalStateException("next() not called or already removed");
                 // shift left to cover removed slot
-                System.arraycopy(baseArray, last + 1, baseArray, last, size - last - 1);
+                System.arraycopy(baseArray, curr + 1, baseArray, curr, size - curr - 1);
                 baseArray[--size] = null; // prevent memory leak
-                cursor = last;    // reset cursor
-                last = -1;
+                prev = curr;    // reset cursor
+                curr = -1;
             }
         };
     }

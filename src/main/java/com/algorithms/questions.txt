@@ -1,5 +1,1 @@
-1 - At remove methods should I return the removed value like pop() or boolean  ?
-Which is cleaner ?
-2 - When do we need to add items to beginning of the list and prefer using LinkedLists ?
-what is the real time example ?
-concurrent m
+DynamicArray benchmark testes are working but why linked list is not ? java heap space ,OutOfMemory error  
