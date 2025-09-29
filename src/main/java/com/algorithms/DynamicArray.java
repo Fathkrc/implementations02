@@ -97,7 +97,8 @@ public class DynamicArray<T> implements Iterable<T> {
         for (int i=0;i< baseArray.length ;i++ ) {
             if (baseArray[i] == val) return i;
         }
-        return -1;// coverage signed here ??
+        return -1;// Done!!
+
     }
 
 }

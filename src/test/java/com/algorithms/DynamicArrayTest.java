@@ -1,8 +1,5 @@
 package com.algorithms;
 
-
-
-
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
@@ -83,6 +80,13 @@ public class DynamicArrayTest {
         a.add("str");
         assertThrows(IndexOutOfBoundsException.class, () -> a.removeAt(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> a.removeAt(1));
+    }
+    @Test
+    void indexOf_boundaryConditions(){
+        DynamicArray<String> a = new DynamicArray<>();
+        a.add("str");
+        assertEquals(0,a.indexOf("str"));
+        assertEquals(-1,a.indexOf("aaa"));
     }
     @Test
     void testIterator_iteratesInOrder_andThrowsAfterEnd() {

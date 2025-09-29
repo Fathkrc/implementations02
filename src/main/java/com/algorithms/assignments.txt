@@ -9,7 +9,7 @@ OK
 5. Fix the package names in tests
 OK
 6. arrayCapacity() shouldn't be part of the public API
-made protected but kept non-private for testing ?? ask **
+ok
 7. Tests must be simple, at least the basic ones
  almost **
 8. Rename tests
@@ -19,6 +19,6 @@ almost
 10. Test Iterator.remove()
 OK
 11. Try running a test with coverage
-OK
+OK all covered
 12. Compare lists using https://github.com/openjdk/jmh
 still checking documentation
