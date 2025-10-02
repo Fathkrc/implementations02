@@ -1,11 +1,13 @@
 package com.algorithms;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class DynamicArray<T> implements Iterable<T> {
     private T[] baseArray;
     private int size;
+    private int modificationCount = 0;
 
     public DynamicArray() { //Constructor creates an array with 2 items and size is default 0
         baseArray =(T[])new  Object[2];
@@ -15,6 +17,7 @@ public class DynamicArray<T> implements Iterable<T> {
     public void add(T value) {
         if (size == baseArray.length) doubleBaseArraySize();
         baseArray[size++] = value;
+        modificationCount++;
     }
 
     public void add(int index, T value) {
@@ -30,8 +33,7 @@ public class DynamicArray<T> implements Iterable<T> {
     public boolean remove(T val) {
         int i = indexOf(val);
         if (i == -1) return false;
-        System.arraycopy(baseArray, i + 1, baseArray, i, size - i - 1);
-        size--;
+        removeAt(i); // Java arraylist does this way also ,
         return true;
     }
     public T removeAt(int index) {
@@ -39,6 +41,7 @@ public class DynamicArray<T> implements Iterable<T> {
         T removedValue = baseArray[index];
         System.arraycopy(baseArray, index + 1, baseArray, index, size - index - 1);
         size--;
+        modificationCount++;
         return removedValue;
     }
 
@@ -65,22 +68,34 @@ public class DynamicArray<T> implements Iterable<T> {
         return new Iterator<>() {
             int prev = 0;
             int curr = -1;
+            int expectedModCount = modificationCount;
             public boolean hasNext() {
+                if (modificationCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return prev < size;
             }
             public T next() {
+                if (modificationCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
                 if (!hasNext()) throw new NoSuchElementException();
                 curr = prev;
                 return baseArray[prev++];
             }
             @Override
             public void remove() {
+                if (modificationCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }// todo: fix boiler plate
+
                 if (curr < 0) throw new IllegalStateException("next() not called or already removed");
                 // shift left to cover removed slot
                 System.arraycopy(baseArray, curr + 1, baseArray, curr, size - curr - 1);
                 baseArray[--size] = null; // prevent memory leak
                 prev = curr;    // reset cursor
                 curr = -1;
+                expectedModCount = modificationCount;
             }
         };
     }

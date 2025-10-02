@@ -4,18 +4,19 @@ public class SpeedComparison {
 
 
     public static void main(String[] args) {
-        System.out.println("===== APPEND =====");
-        compareAppendItems(100000);
+
+//        System.out.println("===== APPEND =====");
+//        compareAppendItems(100000);
 //        DynamicIntArray add 100000 items: 8 ms
 //        SinglyLinkedList add 100000 items: 13275 ms
 
-        System.out.println("\n===== GET (sequential) =====");
-        compareGetItems(100000);
+//        System.out.println("\n===== GET (sequential) =====");
+//        compareGetItems(100000);
 //        DynamicIntArray get 100000 items: 4 ms
 //        SinglyLinkedList get 100000 items: 11581 ms
 
-        System.out.println("\n===== REMOVE AT HEAD =====");
-        compareRemoveAtHead(100000);
+//        System.out.println("\n===== REMOVE AT HEAD =====");
+//        compareRemoveAtHead(100000);
 //        DynamicIntArray removeAt(0) worked 100000: times and the result is : 596 ms
 //        SinglyLinkedList remove(0) worked 100000: times and the result is : 2 ms
 

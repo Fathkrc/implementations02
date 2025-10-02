@@ -2,6 +2,7 @@ package com.algorithms;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -116,5 +117,48 @@ public class DynamicArrayTest {
         it.remove();
         assertEquals(1, arr.size());
         assertEquals(2, arr.get(0));
+    }
+    @Test
+    void iteratorRemove_requiresNextFirst() {
+
+        DynamicArray<Integer> arr = new DynamicArray<>();
+        arr.add(1);
+        Iterator<Integer> it = arr.iterator();
+        assertThrows(IllegalStateException.class, it::remove);
+    }
+
+    @Test
+    void iteratorFailsFast_onExternalModification() {
+        DynamicArray<Integer> arr = new DynamicArray<>();
+        arr.add(1); arr.add(2);
+        Iterator<Integer> it = arr.iterator();
+        arr.add(3); // modify outside iterator
+        assertThrows(ConcurrentModificationException.class, it::next);
+    }
+    @Test
+    void iterationExternalHasNext_ThrowsConcurrentModificationException(){
+        DynamicArray<Integer> arr = new DynamicArray<>();
+        arr.add(1);
+        arr.add(2);
+        Iterator<Integer> it = arr.iterator();
+
+        // External modification
+        arr.removeAt(0);
+
+        assertThrows(ConcurrentModificationException.class, it::hasNext);
+    }
+    @Test
+    void onExternalModification_IteratorThrowsConcurrentModificationException() {
+        DynamicArray<Integer> arr = new DynamicArray<>();
+        arr.add(1);
+        arr.add(2);
+
+        Iterator<Integer> it = arr.iterator();
+        it.next();
+
+        // external modification
+        arr.add(3);
+
+        assertThrows(ConcurrentModificationException.class, it::remove);
     }
 }
