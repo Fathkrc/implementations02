@@ -1,1 +1,2 @@
-is it good practise to call removeAt method in remove method ?
+if our keys are integers <=2^16 (h >>> 16) is not useful right because our different bits will be at lower bits
+is the key mostly String or character ?

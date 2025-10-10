@@ -1,0 +1,28 @@
+#####
+xor or temp variable?
+(x^y) ^ y= x
+
+*C = arr[0] in C
+
+sorted array merge
+long cmp = (*A <= *B); // bool a[0]<b[0]
+long min = *B ^ ((*B ^ *A) & (- cm)) ;
+*C++ = min;
+A +=cmp;
+ na -= cmp;
+В += !cmp;
+ nb -= ! стр;
+
+ MOD
+ r=(x+y)%n
+
+ z= x+y
+ r=(z<n) ? z : z-n
+
+ z = x+y
+ r = z - ( n & -( z >= n ))
+
+ debruijn sequence ?
+
+ 000, 001, 010, 101, 011, 111, 110, 100 , 1_000
+

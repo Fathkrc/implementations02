@@ -2,7 +2,7 @@ package com.algorithms;
 
 public class SinglyLinkedList<T> {
 
-    private Node<T> head; // singly linked list no tail
+    private MyNode<T> head; // singly linked list no tail
     private int size;
 // todo: null remove
     public SinglyLinkedList() {
@@ -11,12 +11,12 @@ public class SinglyLinkedList<T> {
     }
 
     public void add(T value) {
-        Node<T> newNode = new Node<>(value);
+        MyNode<T> newNode = new MyNode<>(value);
         if (head == null) {
             head = newNode;// pointing new node
 
         } else {
-            Node<T> current = head;
+            MyNode<T> current = head;
             while (current.next != null) {
                 current = current.next;
             }
@@ -29,13 +29,13 @@ public class SinglyLinkedList<T> {
     public void add(int index, T value) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
         if (index == 0) {  //if index is 0 the Node we are adding is becoming the new head
-            Node<T> n = new Node<>(value);
+            MyNode<T> n = new MyNode<>(value);
             n.next = head;
             head = n;
         } else {
-            Node<T> prev = head;
+            MyNode<T> prev = head;
             for (int i = 0; i < index - 1; i++) prev = prev.next; // Node at [index-1]
-            Node<T> n = new Node<>(value);
+            MyNode<T> n = new MyNode<>(value);
             n.next = prev.next;  //  previous Node's pointer is now new Node's pointer
             prev.next = n;       // Node at index-1 is pointing the new Node
         }
@@ -47,7 +47,7 @@ public class SinglyLinkedList<T> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        Node<T> current = head;
+        MyNode<T> current = head;
         //iterating Nodes to take value * index * time
         for (int i = 0; i < index; i++) {
             current = current.next;
@@ -65,7 +65,7 @@ public class SinglyLinkedList<T> {
         }
 
         // Case 2: head goes to next element
-        for (Node<T> prev = head, cur = head.next;
+        for (MyNode<T> prev = head, cur = head.next;
              cur != null;
              prev = cur, cur = cur.next) {
 
@@ -82,12 +82,12 @@ public class SinglyLinkedList<T> {
     public T removeAt(int index) {  // remove with index
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
 
-        Node<T> nodeToRemove;
+        MyNode<T> nodeToRemove;
         if (index == 0) {
             nodeToRemove = head;
             head = head.next;
         } else {
-            Node<T> prev = head;
+            MyNode<T> prev = head;
             for (int i = 0; i < index - 1; i++) prev = prev.next;
             nodeToRemove = prev.next;
             prev.next = nodeToRemove.next;

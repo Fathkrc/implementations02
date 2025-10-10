@@ -1,12 +1,12 @@
 package com.algorithms;
 
-public class Node<T> {
+public class MyNode<T> {
 
     T data;
-    Node<T> next;
+    MyNode<T> next;
 
     // Generic data
-    public Node(T data) {
+    public MyNode(T data) {
         this.data = data;
         this.next=null;
     }
