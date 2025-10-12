@@ -1,6 +1,5 @@
 package com.algorithms;
 
-import org.w3c.dom.Node;
 
 import java.util.Objects;
 
@@ -26,7 +25,6 @@ public class HashtableImp <K,V>{
          h=                  10110010 00001011 00000000 00000100
          h >>> 16:           00000000 00000000 10110010 00001011
          h ^= (h >>> 16) =   10110010 00001011 10110010 00001111
-
          */
         h ^= (h >>> 16);
         int i = h & (buckets.length - 1);
@@ -36,6 +34,8 @@ public class HashtableImp <K,V>{
         }
         return null;
     }
+
+
     private static final class Node<K,V> {
         final K key;
         V value;
