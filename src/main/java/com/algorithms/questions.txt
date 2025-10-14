@@ -1,3 +1,5 @@
 if our keys are integers <=2^16 (h >>> 16) is not useful right because our different bits will be at lower bits
 is the key mostly String or character ?
+design choices and efficiency.
 what is the usage of linear probing hashtable ?
+
