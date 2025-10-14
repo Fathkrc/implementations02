@@ -27,6 +27,7 @@ public class DynamicArray<T> implements Iterable<T> {
         if (size == baseArray.length) doubleBaseArraySize();
         System.arraycopy(baseArray, index, baseArray, index + 1, size - index);
         baseArray[index] = value;
+        modificationCount++;
         size++;
     }
 
