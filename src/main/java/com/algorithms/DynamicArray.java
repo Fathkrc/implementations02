@@ -13,7 +13,6 @@ public class DynamicArray<T> implements Iterable<T> {
         baseArray =(T[])new  Object[2];
         size = 0;
     }
-// TODO: ADD ConcurrentModificationException with counter variable changes at all changes
     public void add(T value) {
         if (size == baseArray.length) doubleBaseArraySize();
         baseArray[size++] = value;
@@ -22,7 +21,7 @@ public class DynamicArray<T> implements Iterable<T> {
 
     public void add(int index, T value) {
         if (index < 0 || index > baseArray.length) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException( index +"is an invalid index, " + "array size: " + size);
         }
         if (size == baseArray.length) doubleBaseArraySize();
         System.arraycopy(baseArray, index, baseArray, index + 1, size - index);
@@ -38,7 +37,7 @@ public class DynamicArray<T> implements Iterable<T> {
         return true;
     }
     public T removeAt(int index) {
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException(index +"is an invalid index, " + "array size: " + size);
         T removedValue = baseArray[index];
         System.arraycopy(baseArray, index + 1, baseArray, index, size - index - 1);
         size--;
@@ -52,7 +51,7 @@ public class DynamicArray<T> implements Iterable<T> {
 
     public T get(int index) {
         if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException(index +"is an invalid index, " + "array size: " + size);
         return baseArray[index];
     }
 
@@ -60,7 +59,7 @@ public class DynamicArray<T> implements Iterable<T> {
         return size;
     }
 
-    protected int arrayCapacity() {
+    int arrayCapacity() {
         return baseArray.length;
     }
 
@@ -70,35 +69,38 @@ public class DynamicArray<T> implements Iterable<T> {
             int prev = 0;
             int curr = -1;
             int expectedModCount = modificationCount;
-            public boolean hasNext() {
+
+            private void checkModificationCount(){
                 if (modificationCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
+            }
+            public boolean hasNext() {
+                checkModificationCount();
                 return prev < size;
             }
             public T next() {
-                if (modificationCount != expectedModCount) {
-                    throw new ConcurrentModificationException();
-                }
+                checkModificationCount();
                 if (!hasNext()) throw new NoSuchElementException();
                 curr = prev;
                 return baseArray[prev++];
             }
             @Override
             public void remove() {
-                if (modificationCount != expectedModCount) {
-                    throw new ConcurrentModificationException();
-                }// todo: fix boiler plate
-
+                checkModificationCount();
                 if (curr < 0) throw new IllegalStateException("next() not called or already removed");
                 // shift left to cover removed slot
                 System.arraycopy(baseArray, curr + 1, baseArray, curr, size - curr - 1);
                 baseArray[--size] = null; // prevent memory leak
                 prev = curr;    // reset cursor
                 curr = -1;
-                expectedModCount = modificationCount;
+                modificationCount++;
+                expectedModCount++;
+
             }
+
         };
+
     }
 
 
