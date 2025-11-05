@@ -66,8 +66,15 @@ public class DynamicArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
-            int prev = 0;
-            int curr = -1;
+            int cursor = 0;
+//            int curr = -1;
+            /*
+            [ A, B, C, D ]
+              0  1  2  3
+            index = 0    next thing to return
+            curr = -1  no element yet
+
+             */
             int expectedModCount = modificationCount;
 
             private void checkModificationCount(){
@@ -75,28 +82,49 @@ public class DynamicArray<T> implements Iterable<T> {
                     throw new ConcurrentModificationException();
                 }
             }
+            private int nextIndex() { return Math.abs(cursor); } // -1 1 , -2 2
+            private boolean canRemove() { return cursor < 0; }// flag can remove or not
+            private void set(int nextIndex, boolean canRemove)
+            { cursor = canRemove ? -nextIndex : nextIndex; }
+
             public boolean hasNext() {
                 checkModificationCount();
-                return prev < size;
+                return nextIndex() < size;
             }
             public T next() {
+            /*
+                return A  (index=0)
+                lastReturned = 0
+                index = 1
+            */
                 checkModificationCount();
                 if (!hasNext()) throw new NoSuchElementException();
-                curr = prev;
-                return baseArray[prev++];
+
+                int i = nextIndex();     // i = index to give
+                T val = baseArray[i];    // get element
+                set(i + 1, true);        // move pointer, allow remove
+                return val;
             }
             @Override
             public void remove() {
                 checkModificationCount();
-                if (curr < 0) throw new IllegalStateException("next() not called or already removed");
-                // shift left to cover removed slot
-                System.arraycopy(baseArray, curr + 1, baseArray, curr, size - curr - 1);
-                baseArray[--size] = null; // prevent memory leak
-                prev = curr;    // reset cursor
-                curr = -1;
+                if (!canRemove()) throw new IllegalStateException();
+/*
+remove item at curr=0 → remove A
+shift left → [B, C, D]
+size = 3
+index = lastReturned = 0
+lastReturned = -1  cannot remove again needs next
+
+ */
+                int last = nextIndex() - 1; // the guy we just returned!
+
+                System.arraycopy(baseArray, last + 1, baseArray, last, size - last - 1);
+                baseArray[--size] = null;
+
+                set(last, false);   // pointer goes back, remove forbidden
                 modificationCount++;
                 expectedModCount++;
-
             }
 
         };
